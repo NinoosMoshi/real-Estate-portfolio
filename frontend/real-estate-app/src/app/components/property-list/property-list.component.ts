@@ -1,3 +1,4 @@
+import { HousingService } from './../../services/housing.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertyListComponent implements OnInit {
 
-  constructor() { }
+  properties: any;
+
+  constructor(private housingService: HousingService) { }
 
   ngOnInit(): void {
+    this.housingService.getAllProperties().subscribe(
+      data => {
+          this.properties = data;
+          console.log(data);
+      }, error => {
+          console.log(error);
+      }
+  );
   }
+
 
 }
